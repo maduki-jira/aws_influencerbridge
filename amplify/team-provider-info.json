@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-influencerbridge-dev-132951-authRole",
+      "UnauthRoleArn": "arn:aws:iam::614620923221:role/amplify-influencerbridge-dev-132951-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::614620923221:role/amplify-influencerbridge-dev-132951-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-influencerbridge-dev-132951-deployment",
+      "UnauthRoleName": "amplify-influencerbridge-dev-132951-unauthRole",
+      "StackName": "amplify-influencerbridge-dev-132951",
+      "StackId": "arn:aws:cloudformation:eu-central-1:614620923221:stack/amplify-influencerbridge-dev-132951/d6d7f6d0-604d-11ee-99ca-060faacd5bd6",
+      "AmplifyAppId": "d21q7ef6929ouh"
+    }
+  }
+}
