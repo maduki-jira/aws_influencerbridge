@@ -10,6 +10,17 @@
       "StackName": "amplify-influencerbridge-dev-132951",
       "StackId": "arn:aws:cloudformation:eu-central-1:614620923221:stack/amplify-influencerbridge-dev-132951/d6d7f6d0-604d-11ee-99ca-060faacd5bd6",
       "AmplifyAppId": "d21q7ef6929ouh"
+    },
+    "categories": {
+      "function": {
+        "greetingfunction": {
+          "deploymentBucketName": "amplify-influencerbridge-dev-132951-deployment",
+          "s3Key": "amplify-builds/greetingfunction-6743786a6c394c693350-build.zip"
+        }
+      },
+      "api": {
+        "goapi": {}
+      }
     }
   }
 }
