@@ -1,43 +1,60 @@
 {
-  "api": {
-    "goapi": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "greetingfunction"
+    "api": {
+        "goapi": {
+            "dependsOn": [
+                {
+                    "attributes": ["Name", "Arn"],
+                    "category": "function",
+                    "resourceName": "greetingfunction"
+                }
+            ],
+            "providerPlugin": "awscloudformation",
+            "service": "API Gateway"
         }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    }
-  },
-  "function": {
-    "greetingfunction": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_greetingfunction_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "greetingfunction"
-        }
-      ]
     },
-    "AMPLIFY_function_greetingfunction_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "greetingfunction"
+    "auth": {
+        "influencerbridgea70247a9": {
+            "customAuth": false,
+            "dependsOn": [],
+            "frontendAuthConfig": {
+                "mfaConfiguration": "OFF",
+                "mfaTypes": ["SMS"],
+                "passwordProtectionSettings": {
+                    "passwordPolicyCharacters": [],
+                    "passwordPolicyMinLength": 8
+                },
+                "signupAttributes": ["EMAIL"],
+                "socialProviders": [],
+                "usernameAttributes": [],
+                "verificationMechanisms": ["EMAIL"]
+            },
+            "providerPlugin": "awscloudformation",
+            "service": "Cognito"
         }
-      ]
+    },
+    "function": {
+        "greetingfunction": {
+            "build": true,
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda"
+        }
+    },
+    "parameters": {
+        "AMPLIFY_function_greetingfunction_deploymentBucketName": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "greetingfunction"
+                }
+            ]
+        },
+        "AMPLIFY_function_greetingfunction_s3Key": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "greetingfunction"
+                }
+            ]
+        }
     }
-  }
 }
