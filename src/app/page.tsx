@@ -1,6 +1,5 @@
 'use client';
 import { useEffect } from 'react';
-
 import { Amplify } from 'aws-amplify';
 import awsconfig from '@/aws-exports';
 import '@aws-amplify/ui-react/styles.css';
@@ -8,12 +7,11 @@ import Form from './Auth/Form';
 import React, { useState } from 'react';
 import { Auth, Hub } from 'aws-amplify';
 import { user } from '@/Types/user';
+import DarkLight from '@/components/DarkLight';
 
 Amplify.configure(awsconfig);
 
-
 function Profile() {
-
     useEffect(() => {
         checkUser();
         Hub.listen('auth', (data) => {
@@ -42,11 +40,23 @@ function Profile() {
 
     if (user) {
         return (
-            <div>
-                <h1>Profile</h1>
-                <h2>Username: {user.username}</h2>
-                <h3>Email: {user.email}</h3>
-                <button onClick={signOut}>Sign Out</button>
+            <div className=''>
+                <DarkLight />
+                <span className="text-highlight-light dark:text-highlight-dark text-header bg-blue-300 ">
+                    Profile
+                </span>
+                <span className="text-primary-light dark:text-primary-dark text-subheader bg-blue-300 ">
+                    Username: {user.username}
+                </span>
+                <span className="text-background-light dark:text-background-dark text-body bg-blue-300">
+                    Email: {user.email}
+                </span>
+                <button
+                    onClick={signOut}
+                    className="text-text-light dark:text-text-dark text-subbody bg-blue-300 "
+                >
+                    Sign Out
+                </button>
             </div>
         );
     }
