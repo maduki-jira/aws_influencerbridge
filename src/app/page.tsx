@@ -1,36 +1,14 @@
 'use client';
-import { API } from 'aws-amplify';
 import { useEffect } from 'react';
 
 import { Amplify } from 'aws-amplify';
 import awsconfig from '@/aws-exports';
-import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
-import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import Form from './Auth/Form';
 import React, { useState } from 'react';
 import { Auth, Hub } from 'aws-amplify';
 
 Amplify.configure(awsconfig);
-
-// function Home({ signOut, user }: WithAuthenticatorProps) {
-//   useEffect(() => {
-//     const response = API.get("goapi", "/hello", {});
-//     console.log(response.then((r) => console.log(r)));
-//   }, []);
-//
-//   return (
-//     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-//       {/* <h1>Hello {user?.username}</h1> */}
-//       {/* <button onClick={signOut}>Sign out</button> */}
-//
-//       <Form />
-//     </main>
-//   );
-// }
-
-// Profile.js
-// This component is a page that will hold the user's data when they signed up
 
 type user = {
     username: string;
@@ -75,4 +53,3 @@ function Profile() {
 }
 
 export default Profile;
-// export default withAuthenticator(Home);
