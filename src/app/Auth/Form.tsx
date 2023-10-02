@@ -12,7 +12,7 @@ import {
     signUp,
 } from '@/utils/handleSignin';
 
-const initialFormState = {
+const INITIAL_FORM_STATE = {
     username: '',
     password: '',
     email: '',
@@ -21,7 +21,7 @@ const initialFormState = {
 
 export default function Form({ setUser }: { setUser: any }) {
     const [formType, updateFormType] = useState('signIn');
-    const [formState, updateFormState] = useState(initialFormState);
+    const [formState, updateFormState] = useState(INITIAL_FORM_STATE);
 
     function updateForm(event: any) {
         const newFormState = {
@@ -79,33 +79,5 @@ export default function Form({ setUser }: { setUser: any }) {
         }
     }
 
-    return (
-        <div>
-            {renderForm()}
-            {formType === 'signUp' && (
-                <p>
-                    Already have an account?{' '}
-                    <span onClick={() => updateFormType('signIn')}>
-                        Sign In
-                    </span>
-                </p>
-            )}
-            {formType === 'signIn' && (
-                <>
-                    <p>
-                        Need an account?{' '}
-                        <span onClick={() => updateFormType('signUp')}>
-                            Sign Up
-                        </span>
-                    </p>
-                    <p>
-                        Forget your password?{' '}
-                        <span onClick={() => updateFormType('forgotPassword')}>
-                            Reset Password
-                        </span>
-                    </p>
-                </>
-            )}
-        </div>
-    );
+    return <div>{renderForm()}</div>;
 }

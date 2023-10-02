@@ -30,7 +30,15 @@ function SignUp({ updateFormState, signUp } : { updateFormState: (event: any) =>
                 }}
                 placeholder="email"
             />
+
             <button onClick={signUp}>Sign Up</button>
+
+                <p>
+                    Already have an account?{' '}
+                    <span onClick={() => updateFormState('signIn')}>
+                        Sign In
+                    </span>
+                </p>
         </div>
     );
 }

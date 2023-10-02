@@ -7,16 +7,13 @@ import '@aws-amplify/ui-react/styles.css';
 import Form from './Auth/Form';
 import React, { useState } from 'react';
 import { Auth, Hub } from 'aws-amplify';
+import { user } from '@/Types/user';
 
 Amplify.configure(awsconfig);
 
-type user = {
-    username: string;
-    email: string;
-    phone_number: string;
-};
 
 function Profile() {
+
     useEffect(() => {
         checkUser();
         Hub.listen('auth', (data) => {
@@ -26,7 +23,9 @@ function Profile() {
             }
         });
     }, []);
+
     const [user, setUser] = useState<user | null>();
+
     async function checkUser() {
         try {
             const data = await Auth.currentUserPoolUser();
@@ -36,9 +35,11 @@ function Profile() {
             console.log('error: ', err);
         }
     }
+
     function signOut() {
         Auth.signOut().catch((err) => console.log('error signing out: ', err));
     }
+
     if (user) {
         return (
             <div>
@@ -49,6 +50,7 @@ function Profile() {
             </div>
         );
     }
+
     return <Form setUser={setUser} />;
 }
 
