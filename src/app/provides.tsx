@@ -3,6 +3,6 @@ import { ThemeProvider } from "next-themes";
 
 export default function Provider({children}: {children: React.ReactNode}){
     return (
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider attribute="class">{children}</ThemeProvider>
     )
 }

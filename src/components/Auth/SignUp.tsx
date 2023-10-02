@@ -1,8 +1,14 @@
-// SignUp.js
 import React from 'react';
 
-function SignUp({ updateFormState, signUp } : { updateFormState: (event: any) => void
-, signUp: () => void }) {
+function SignUp({
+    updateFormState,
+    signUp,
+    updateFormType,
+}: {
+    updateFormState: (event: any) => void;
+    signUp: () => void;
+    updateFormType: (formType: string) => void;
+}) {
     return (
         <div>
             <input
@@ -11,6 +17,7 @@ function SignUp({ updateFormState, signUp } : { updateFormState: (event: any) =>
                     e.persist();
                     updateFormState(e);
                 }}
+                className='text-text-light dark:text-text-dark text-subbody bg-blue-300'
                 placeholder="username"
             />
             <input
@@ -33,12 +40,10 @@ function SignUp({ updateFormState, signUp } : { updateFormState: (event: any) =>
 
             <button onClick={signUp}>Sign Up</button>
 
-                <p>
-                    Already have an account?{' '}
-                    <span onClick={() => updateFormState('signIn')}>
-                        Sign In
-                    </span>
-                </p>
+            <p>
+                Already have an account?{' '}
+                <span onClick={() => updateFormType('signIn')}>Sign In</span>
+            </p>
         </div>
     );
 }

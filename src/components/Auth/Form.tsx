@@ -11,6 +11,7 @@ import {
     signIn,
     signUp,
 } from '@/utils/handleSignin';
+import DarkLight from '../DarkLight';
 
 const INITIAL_FORM_STATE = {
     username: '',
@@ -38,6 +39,7 @@ export default function Form({ setUser }: { setUser: any }) {
                     <SignUp
                         signUp={() => signUp(formState, updateFormType)}
                         updateFormState={(e) => updateForm(e)}
+                        updateFormType={updateFormType}
                     />
                 );
             case 'confirmSignUp':
@@ -54,6 +56,7 @@ export default function Form({ setUser }: { setUser: any }) {
                     <SignIn
                         signIn={() => signIn(formState, setUser)}
                         updateFormState={updateForm}
+                        updateFormType={updateFormType}
                     />
                 );
             case 'forgotPassword':
@@ -79,5 +82,22 @@ export default function Form({ setUser }: { setUser: any }) {
         }
     }
 
-    return <div>{renderForm()}</div>;
+    return (
+        <div className="flex min-h-screen flex-1">
+            <div className="bg-background-light dark:bg-background-dark flex justify-center items-center">
+                {renderForm()}
+            </div>
+
+            <div className="flex min-h-full flex-1">
+                <div className="relative hidden w-0 flex-1 lg:block">
+                    <img
+                        className="absolute inset-0 h-full w-full object-cover"
+                        src="https://images.unsplash.com/photo-1496917756835-20cb06e75b4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80"
+                        alt=""
+                    />
+                </div>
+            </div>
+        </div>
+    );
 }
+
