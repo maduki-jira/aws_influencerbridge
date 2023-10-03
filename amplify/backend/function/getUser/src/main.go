@@ -27,7 +27,7 @@ func addItem() {
 	// Create DynamoDB client
 	svc := dynamodb.New(sess)
 
-    	item := Item{
+	item := Item{
 		number: 1,
 		text:   "hello",
 	}
