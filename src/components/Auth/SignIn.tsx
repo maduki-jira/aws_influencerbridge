@@ -1,4 +1,8 @@
 import React from 'react';
+import Logo from '../../../public/Logo.png';
+import LogoForDark from '../../../public/LogoForDark.png';
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
 function SignIn({
     signIn,
@@ -9,36 +13,35 @@ function SignIn({
     updateFormState: any;
     updateFormType: any;
 }) {
+    const {theme, setTheme} = useTheme();
     return (
         <div>
             <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
                 <div className="mx-auto w-full max-w-sm lg:w-96">
                     <div>
-                        <img
-                            className="h-10 w-auto"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                            alt="Your Company"
+                    {/* LOGO */}
+                        <Image
+                            className="h-40 w-auto mx-auto"
+                            src={theme === 'dark' ? LogoForDark : Logo}
+                            alt="Influencer Bridge Logo"
                         />
-                        <h2
-                            className="mt-8 text-2xl font-bold leading-9 tracking-tight text-text-light dark:text-text-dark sm:text-3xl sm:leading-10
-                        "
-                        >
+                        <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-text-light dark:text-text-dark sm:text-3xl sm:leading-10 ">
                             Sign in to your account
                         </h2>
                         <p className="mt-2 text-sm leading-6 text-text-light dark:text-text-dark max-w">
                             Not a member?{' '}
-                            <a
-                                href="#"
-                                className="font-semibold text-primary-light dark:text-primary-dark hover:text-primary-light/40 dark:hover:text-primary-dark/40 hover:underline "
+                            <span
+                                className="font-semibold text-primary-light hover:cursor-pointer dark:text-primary-dark  hover:underline "
+                                onClick={() => updateFormType('signUp')}
                             >
                                 Start a 14 day free trial
-                            </a>
+                            </span>
                         </p>
                     </div>
 
                     <div className="mt-10">
                         <div>
-                            <form className="space-y-6">
+                            <form className="space-y-6" method='POST'>
                                 <div>
                                     <label
                                         htmlFor="username"
@@ -53,7 +56,9 @@ function SignIn({
                                             type="username"
                                             autoComplete="username"
                                             required
-                                            className="bg-white text-black px-3 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="bg-white text-black px-3 block w-full rounded-md
+                                            py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400
+                                            focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             onChange={(e) => {
                                                 e.persist();
                                                 updateFormState(e);
@@ -76,7 +81,9 @@ function SignIn({
                                             type="password"
                                             autoComplete="current-password"
                                             required
-                                            className="bg-white text-black px-3 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="bg-white text-black px-3 block w-full rounded-md
+                                            py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400
+                                            focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             onChange={(e) => {
                                                 e.persist();
                                                 updateFormState(e);
@@ -103,7 +110,7 @@ function SignIn({
 
                                     <div className="text-sm leading-6">
                                         <span
-                                            className="font-semibold text-primary-light dark:text-primary-dark cursor-pointer "
+                                            className="font-light text-primary-light underline dark:text-primary-dark cursor-pointer "
                                             onClick={() =>
                                                 updateFormState(
                                                     'forgotPassword'
@@ -118,7 +125,15 @@ function SignIn({
                                 <div>
                                     <button
                                         type="submit"
-                                        className="flex w-full justify-center rounded-md bg-highlight-light dark:bg-highlight-dark px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        className="flex w-full justify-center rounded-md bg-highlight-light 
+                                        dark:bg-highlight-dark px-3 py-1.5 text-sm font-semibold leading-6 
+                                        border-2 border-primary-light dark:border-primary-dark 
+                                        text-white 
+                                        hover:bg-primary-light dark:hover:bg-primary-dark
+                                        hover:border-highlight-light dark:hover:border-highlight-dark
+                                        transition-colors duration-200 ease-in-out
+                                        focus-visible:outline focus-visible:outline-2
+                                        focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                         onClick={signIn}
                                     >
                                         Sign in

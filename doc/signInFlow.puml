@@ -1,0 +1,39 @@
+@startuml
+
+start
+
+
+    :SignIn;
+    if (SignIn Success?) then (yes)
+        :Access to Protected Routes;
+        stop
+    else (no)
+        if (Forgot Password?) then (Forgot Password Screen)
+            :Send Email;
+            :Reset Password;
+            :SignIn;
+            if (SignIn Success?) then (yes)
+                :Access to Protected Routes;
+                stop
+            else (no)
+                :Show Error;
+                stop
+            endif
+        else (no)
+            :SignUp;
+            if (SignUp Success?) then (yes)
+                :SignIn;
+                if (SignIn Success?) then (yes)
+                    :Access to Protected Routes;
+                    stop
+                else (no)
+                    :Show Error;
+                    stop
+                endif
+            else (no)
+                :Show Error;
+                stop
+
+    endif
+@enduml
+

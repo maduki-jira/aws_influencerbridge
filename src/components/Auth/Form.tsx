@@ -11,7 +11,6 @@ import {
     signIn,
     signUp,
 } from '@/utils/handleSignin';
-import DarkLight from '../DarkLight';
 
 const INITIAL_FORM_STATE = {
     username: '',

@@ -1,0 +1,28 @@
+{
+  "resourceName": "dynamoDB",
+  "tableName": "test",
+  "partitionKey": {
+    "fieldName": "number",
+    "fieldType": "number"
+  },
+  "sortKey": {
+    "fieldName": "text",
+    "fieldType": "string"
+  },
+  "gsi": [
+    {
+      "name": "GSI",
+      "partitionKey": {
+        "fieldName": "text",
+        "fieldType": "string"
+      },
+      "sortKey": {
+        "fieldName": "number",
+        "fieldType": "number"
+      }
+    }
+  ],
+  "triggerFunctions": [
+    "greetingfunction"
+  ]
+}

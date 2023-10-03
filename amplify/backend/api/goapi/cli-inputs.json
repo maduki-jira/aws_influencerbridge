@@ -1,12 +1,25 @@
 {
-    "version": 1,
-    "paths": {
-        "/hello": {
-            "name": "/hello",
-            "lambdaFunction": "greetingfunction",
-            "permissions": {
-                "setting": "open"
-            }
-        }
+  "version": 1,
+  "paths": {
+    "/hello": {
+      "name": "/hello",
+      "lambdaFunction": "greetingfunction",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/user": {
+      "name": "/user",
+      "lambdaFunction": "getUser",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
     }
+  }
 }
