@@ -5,40 +5,37 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
-
 	"fmt"
+	"log"
 )
 
-// Create struct to hold info about new item
+// Update Item struct to match your DynamoDB table's schema
 type Item struct {
-	number int    `dynamodbav:"number"`
-	text   string `dynamodbav:"Text"`
+	Name string `dynamodbav:"Name"`
+	// Add other attributes as needed
+	// Age  int    `dynamodbav:"Age"`
+	// ...
 }
 
 func addItem() {
-	// Initialize a session that the SDK will use to load
-	// credentials from the shared credentials file ~/.aws/credentials
-	// and region from the shared configuration file ~/.aws/config.
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 		Profile:           "Admin_User",
 	}))
 
-	// Create DynamoDB client
 	svc := dynamodb.New(sess)
 
 	item := Item{
-		number: 1,
-		text:   "hello",
+		Name: "JohnDoe",
 	}
 
 	av, err := dynamodbattribute.MarshalMap(item)
 
 	if err != nil {
-		fmt.Errorf("got error marshalling item: %v", err)
+		log.Fatalf("got error marshalling item: %v", err)
 	}
 
-	tableName := "test-dev"
+	tableName := "Users_DB"
 
 	input := &dynamodb.PutItemInput{
 		Item:      av,
@@ -47,13 +44,13 @@ func addItem() {
 
 	_, err = svc.PutItem(input)
 	if err != nil {
-		fmt.Errorf("got error calling PutItem: %v", err)
+		log.Fatalf("got error calling PutItem: %v", err)
 	}
 
-	fmt.Println("Successfully added item: Number =", item.number, ", Text =", item.text)
-
+	fmt.Println("Successfully added item: Name =", item.Name)
 }
 
 func main() {
 	addItem()
 }
+
