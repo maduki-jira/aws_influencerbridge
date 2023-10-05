@@ -1,56 +1,43 @@
 package main
 
 import (
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/dynamodb"
-	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
-	"fmt"
-	"log"
+	"bytes"
+	"context"
+	"encoding/json"
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
 )
 
-// Update Item struct to match your DynamoDB table's schema
-type Item struct {
-	Name string `dynamodbav:"Name"`
-	// Add other attributes as needed
-	// Age  int    `dynamodbav:"Age"`
-	// ...
-}
+type Response events.APIGatewayProxyResponse
 
-func addItem() {
-	sess := session.Must(session.NewSessionWithOptions(session.Options{
-		SharedConfigState: session.SharedConfigEnable,
-		Profile:           "Admin_User",
-	}))
+func Handler(ctx context.Context) (Response, error) {
+	addItem()
+	var buf bytes.Buffer
 
-	svc := dynamodb.New(sess)
-
-	item := Item{
-		Name: "JohnDoe",
-	}
-
-	av, err := dynamodbattribute.MarshalMap(item)
-
+	body, err := json.Marshal(map[string]interface{}{
+		"message": "Congrats! Your function executed successfully!",
+	})
 	if err != nil {
-		log.Fatalf("got error marshalling item: %v", err)
+		return Response{StatusCode: 404}, err
+	}
+	json.HTMLEscape(&buf, body)
+
+	resp := Response{
+		StatusCode:      200,
+		IsBase64Encoded: false,
+		Body:            buf.String(),
+		Headers: map[string]string{
+			"Content-Type":                 "application/json",
+			"X-MyCompany-Func-Reply":       "hello-handler",
+			"Access-Control-Allow-Origin":  "*",
+			"Access-Control-Allow-Methods": "POST, GET, OPTIONS, PUT, DELETE",
+			"Access-Control-Allow-Headers": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization",
+		},
 	}
 
-	tableName := "Users_DB"
-
-	input := &dynamodb.PutItemInput{
-		Item:      av,
-		TableName: aws.String(tableName),
-	}
-
-	_, err = svc.PutItem(input)
-	if err != nil {
-		log.Fatalf("got error calling PutItem: %v", err)
-	}
-
-	fmt.Println("Successfully added item: Name =", item.Name)
+	return resp, nil
 }
 
 func main() {
-	addItem()
+	lambda.Start(Handler)
 }
-
